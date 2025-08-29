@@ -1,6 +1,8 @@
-﻿
-namespace WebsiteServerApp.Presentation.Middlewares;
+﻿namespace WebsiteServerApp.Presentation.Middlewares;
 
+/// <summary>
+/// Middleware to catch and process unhandle exception during an API call execution.
+/// </summary>
 public class ErrorHandlerMiddleware : IMiddleware
 {
     private readonly ILogger<ErrorHandlerMiddleware> _logger;

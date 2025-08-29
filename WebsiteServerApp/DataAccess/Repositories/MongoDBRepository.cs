@@ -6,6 +6,9 @@ using WebsiteServerApp.DataAccess.Models.Base;
 
 namespace WebsiteServerApp.DataAccess.Repositories;
 
+/// <summary>
+/// Repository base class that contains the data access methods for operations on the repository collection.
+/// </summary>
 public abstract class MongoDBRepository<T> : IMongoDBRepository<T>
     where T : BaseModel
 {

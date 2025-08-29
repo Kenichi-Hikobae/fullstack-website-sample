@@ -3,6 +3,9 @@ using WebsiteServerApp.DataAccess.Models;
 
 namespace WebsiteServerApp.BusinessServices.DTOs.Base;
 
+/// <summary>
+/// Static class that contains all the conversion between the models in the application.
+/// </summary>
 public static class DTOMapper
 {
     #region Property

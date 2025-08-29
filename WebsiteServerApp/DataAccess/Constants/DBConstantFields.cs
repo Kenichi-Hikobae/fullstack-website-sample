@@ -1,5 +1,8 @@
 ﻿namespace WebsiteServerApp.DataAccess.Constants;
 
+/// <summary>
+/// Static class that contains all the constants used in the Database.
+/// </summary>
 public static class DBConstantFields
 {
     public const string IdKey = "_id";

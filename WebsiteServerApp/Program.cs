@@ -33,9 +33,10 @@ builder.Services.AddCors(options =>
     });
 });
 
-/// Default Logging
+/// Logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 var app = builder.Build();
 

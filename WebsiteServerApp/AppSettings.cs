@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿namespace WebsiteServerApp;
 
-namespace WebsiteServerApp;
-
+/// <summary>
+/// The current appsetting registered to be used in by the API.
+/// </summary>
 public enum AppSettingType
 {
     MongoDbConnectionString,
@@ -9,28 +10,33 @@ public enum AppSettingType
     WebBaseURL,
 }
 
+/// <summary>
+/// Class that implements methods for getting appsettings from the API client.
+/// </summary>
 public class AppSettings : IAppSettings
 {
-    public IConfiguration Configuration { get; private set; }
-    public bool IsInitialized => Configuration is not null;
+    private readonly IConfiguration _configuration;
+    public bool IsInitialized => _configuration is not null;
 
     public AppSettings(IConfiguration configuration)
     {
-        Configuration = configuration;
+        _configuration = configuration;
     }
 
+    /// <inheritdoc/>
     public string GetSetting(AppSettingType type)
     {
-        return Configuration[string.Join(":", type.ToString().Split("_"))] ?? string.Empty;
+        return _configuration[string.Join(":", type.ToString().Split("_"))] ?? string.Empty;
     }
 
+    /// <inheritdoc/>
     public bool TryGetSetting(AppSettingType type, out string value)
     {
         value = string.Empty;
         if (!IsInitialized)
             return false;
 
-        value = Configuration[string.Join(":", type.ToString().Split("_"))] ?? string.Empty;
+        value = _configuration[string.Join(":", type.ToString().Split("_"))] ?? string.Empty;
 
         return string.IsNullOrEmpty(value);
     }

@@ -24,7 +24,7 @@ public class PropertyController : Controller
     }
 
     [HttpGet]
-    [Route("{ownerId:string}")]
+    [Route("{ownerId}")]
     public async Task<List<PropertyDTO>> GetPropertiesByOwner(string ownerId)
     {
         return await _propertyService.GetPropertiesByOwnerAsync(ownerId);
@@ -37,7 +37,7 @@ public class PropertyController : Controller
     }
 
     [HttpGet]
-    [Route("{propertyId:string}")]
+    [Route("{propertyId}")]
     public async Task<List<PropertyTraceDTO>> GetTracesByProperty(string propertyId)
     {
         return await _propertyService.GetTracesByPropertyAsync(propertyId);
