@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using WebsiteServerApp.BusinessServices.DTOs;
 using WebsiteServerApp.DataAccess.Models;
 
 namespace WebsiteServerApp.DataAccess.Interfaces;
@@ -26,11 +25,17 @@ public interface IPropertyRepository
     /// </summary>
     /// <param name="filters">The filters to be applied in the collection.</param>
     /// <returns>A list with all the properties found.</returns>
-    Task<List<Property>> GetPropertiesByFiltersAsync(FilterDefinition<Property> filters);
+    Task<List<Property>> GetPropertiesByFiltersAsync(FilterDefinition<Property> filters, int pageNumber, int pageSize);
     /// <summary>
     /// Get the traces from a property.
     /// </summary>
     /// <param name="propertyId">The property id to be search.</param>
     /// <returns>A list with all the properties traces found.</returns>
     Task<List<PropertyTrace>> GetTracesByPropertyIdAsync(ObjectId propertyId);
+    /// <summary>
+    /// Get the count of document when a filter is applied.
+    /// </summary>
+    /// <param name="filters">The filters to be applied.</param>
+    /// <returns>The count value.</returns>
+    Task<long> GetCountByFiltersAsync(FilterDefinition<Property> filters);
 }

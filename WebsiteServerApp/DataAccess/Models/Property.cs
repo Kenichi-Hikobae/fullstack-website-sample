@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using WebsiteServerApp.DataAccess.Enums;
 using WebsiteServerApp.DataAccess.Models.Base;
 
 namespace WebsiteServerApp.DataAccess.Models;
@@ -29,6 +30,10 @@ public class Property : BaseModel
     /// The year the property was registered.
     /// </summary>
     public int Year { get; set; }
+    /// <summary>
+    /// THe type of this property.
+    /// </summary>
+    public PropertyType PropertyType { get; set; }
 
     /// <summary>
     /// The owner id of this property.
@@ -38,10 +43,12 @@ public class Property : BaseModel
     /// <summary>
     /// The property images for this property.
     /// </summary>
+    [BsonElement("images")]
     public List<PropertyImage> PropertyImages { get; set; }
     /// <summary>
     /// The property traces for this property.
     /// </summary>
+    [BsonElement("traces")]
     public List<PropertyTrace> PropertyTraces { get; set; }
 
     public Property() : base()
@@ -51,6 +58,7 @@ public class Property : BaseModel
         Price = 0;
         CodeInternal = 0;
         Year = 1900;
+        PropertyType = PropertyType.Type1;
         OwnerId = null;
         PropertyImages = new();
         PropertyTraces = new();
@@ -62,6 +70,7 @@ public class Property : BaseModel
         float price,
         int codeInternal,
         int year,
+        PropertyType type,
         ObjectId ownerId
         )
         : base()
@@ -71,6 +80,7 @@ public class Property : BaseModel
         Price = price;
         CodeInternal = codeInternal;
         Year = year;
+        PropertyType = type;
         OwnerId = ownerId;
         PropertyImages = new();
         PropertyTraces = new();
@@ -82,6 +92,7 @@ public class Property : BaseModel
         float price,
         int codeInternal,
         int year,
+        PropertyType type,
         ObjectId ownerId,
         List<PropertyImage> propertyImages,
         List<PropertyTrace> propertyTraces
@@ -93,6 +104,7 @@ public class Property : BaseModel
         Price = price;
         CodeInternal = codeInternal;
         Year = year;
+        PropertyType = type;
         OwnerId = ownerId;
         PropertyImages = propertyImages;
         PropertyTraces = propertyTraces;

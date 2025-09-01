@@ -1,8 +1,10 @@
-﻿using WebsiteServerApp.BusinessServices.DTOs;
+﻿using Newtonsoft.Json;
+using WebsiteServerApp.BusinessServices.DTOs;
 using WebsiteServerApp.BusinessServices.DTOs.Base;
 using WebsiteServerApp.BusinessServices.Interfaces;
 using WebsiteServerApp.DataAccess.Interfaces;
 using WebsiteServerApp.DataAccess.Models;
+using WebsiteServerApp.DataAccess.Repositories;
 
 namespace WebsiteServerApp.BusinessServices.Services;
 
@@ -12,6 +14,7 @@ namespace WebsiteServerApp.BusinessServices.Services;
 public class OwnerService : IOwnerService
 {
     private readonly IOwnerRepository _ownerRepository;
+    private OwnerRepository _repository => _ownerRepository as OwnerRepository;
 
     public OwnerService(IOwnerRepository ownerRepository)
     {
@@ -26,5 +29,16 @@ public class OwnerService : IOwnerService
         List<OwnerDTO> result = owners.Select(owner => owner.ToDTO()).ToList();
 
         return result;
+    }
+
+    /// <inheritdoc/>
+    public async Task InsertBulkDataAsync(List<OwnerDTO> owners)
+    {
+        List<Owner> ownersModels = owners.Select(owner => owner.ToDatabase()).ToList();
+
+        var serialize = JsonConvert.SerializeObject(ownersModels);
+        File.WriteAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/owners.json", serialize);
+
+        await _repository.InsertBulkAsync(ownersModels);
     }
 }

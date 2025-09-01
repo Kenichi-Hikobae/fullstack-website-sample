@@ -12,4 +12,10 @@ public interface IOwnerService
     /// </summary>
     /// <returns>A list of owners DTOs</returns>
     Task<List<OwnerDTO>> GetAllOwnersAsync();
+    /// <summary>
+    /// Insert the given owners to the repository.
+    /// </summary>
+    /// <param name="owners">The owner models to be inserted.</param>
+    /// <returns>The task result.</returns>
+    Task InsertBulkDataAsync(List<OwnerDTO> owners);
 }

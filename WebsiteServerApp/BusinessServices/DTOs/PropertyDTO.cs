@@ -1,4 +1,5 @@
 ﻿using WebsiteServerApp.BusinessServices.DTOs.Base;
+using WebsiteServerApp.DataAccess.Enums;
 
 namespace WebsiteServerApp.BusinessServices.DTOs;
 
@@ -25,6 +26,10 @@ public class PropertyDTO : BaseModelDTO
     /// </summary>
     public int Year { get; set; }
     /// <summary>
+    /// The type of this property.
+    /// </summary>
+    public PropertyType PropertyType { get; set; }
+    /// <summary>
     /// The owner id of this property.
     /// </summary>
     public string? OwnerId { get; set; }
@@ -44,6 +49,7 @@ public class PropertyDTO : BaseModelDTO
         Price = 0;
         CodeInternal = 0;
         Year = 1900;
+        PropertyType = PropertyType.Type1;
         OwnerId = string.Empty;
         PropertyImages = new();
         PropertyTraces = new();
@@ -56,6 +62,7 @@ public class PropertyDTO : BaseModelDTO
         float price,
         int codeInternal,
         int year,
+        PropertyType type,
         string ownerId,
         List<PropertyImageDTO> propertyImages,
         List<PropertyTraceDTO> propertyTraces
@@ -67,6 +74,7 @@ public class PropertyDTO : BaseModelDTO
         Price = price;
         CodeInternal = codeInternal;
         Year = year;
+        PropertyType = type;
         OwnerId = ownerId;
         PropertyImages = propertyImages;
         PropertyTraces = propertyTraces;

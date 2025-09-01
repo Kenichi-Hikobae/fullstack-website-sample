@@ -12,6 +12,10 @@ public class Owner : BaseModel
     /// </summary>
     public string Name { get; set; }
     /// <summary>
+    /// The email of the owner.
+    /// </summary>
+    public string Email { get; set; }
+    /// <summary>
     /// The address of the owner.
     /// </summary>
     public string Address { get; set; }
@@ -28,14 +32,16 @@ public class Owner : BaseModel
     {
         Name = string.Empty;
         Address = string.Empty;
+        Email = string.Empty;
         Photo = string.Empty;
         Birthday = DateTime.MinValue;
     }
 
-    public Owner(string name, string address, string photo, DateTime birthday)
+    public Owner(string name, string email, string address, string photo, DateTime birthday)
         : base()
     {
         Name = name;
+        Email = email;
         Address = address;
         Photo = photo;
         Birthday = birthday;

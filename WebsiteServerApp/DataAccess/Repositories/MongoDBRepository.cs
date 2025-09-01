@@ -36,10 +36,10 @@ public abstract class MongoDBRepository<T> : IMongoDBRepository<T>
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
         _client = new MongoClient(settings);
-        _database = _client.GetDatabase(mongoUrl.DatabaseName);
+        _database = _client.GetDatabase(DBConstantFields.DatabasePropertyName);
         try
         {
-            BsonDocument result = _client.GetDatabase("admin").RunCommand<BsonDocument>(new BsonDocument("ping", 1));
+            BsonDocument result = _database.RunCommand<BsonDocument>(new BsonDocument("ping", 1));
             Console.WriteLine("Pinged your deployment. You successfully connected to MongoDB!");
         }
         catch (Exception ex)
@@ -121,6 +121,20 @@ public abstract class MongoDBRepository<T> : IMongoDBRepository<T>
     }
 
     /// <inheritdoc/>
+    public async Task InsertBulkAsync(List<T> documents)
+    {
+        try
+        {
+            await _collection.InsertManyAsync(documents);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw new Exception("Failed to insert one document.");
+        }
+    }
+
+    /// <inheritdoc/>
     public async Task<T> UpdateAsync(ObjectId id, T document)
     {
         try
@@ -132,6 +146,20 @@ public abstract class MongoDBRepository<T> : IMongoDBRepository<T>
         {
             Console.WriteLine(ex);
             throw new Exception($"Failed to update document with id:{id}.");
+        }
+    }
+
+    /// <inheritdoc/>
+    public async Task<long> GetTotalCount()
+    {
+        try
+        {
+            return await _collection.CountDocumentsAsync(Builders<T>.Filter.Empty);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw new Exception($"Failed to get total count.");
         }
     }
 }

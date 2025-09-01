@@ -39,4 +39,15 @@ public interface IMongoDBRepository<T> where T : BaseModel
     /// </summary>
     /// <returns>All the model of the collection.</returns>
     Task<IList<T>> GetAllAsync();
+    /// <summary>
+    /// Insert many document at once.
+    /// </summary>
+    /// <param name="documents">The documents to be added.</param>
+    /// <returns>The task result.</returns>
+    Task InsertBulkAsync(List<T> documents);
+    /// <summary>
+    /// Get the total count in the current collection.
+    /// </summary>
+    /// <returns>A number with all the count.</returns>
+    Task<long> GetTotalCount();
 }

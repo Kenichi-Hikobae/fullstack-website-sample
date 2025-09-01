@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,7 +8,22 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.4.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NSwag.AspNetCore" Version="14.5.0" />
+    <PackageReference Include="NSwag.MSBuild" Version="14.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
+	
+    <Target Name="Nswag" AfterTargets="PostBuildEvent">
+		<Delete Files="$(ProjectDir)\Nswag\apiClient.ts" />
+	    <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
+    </Target>
+	
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="xcopy &quot;$(ProjectDir)Nswag\ApiClient.ts&quot; &quot;$(ProjectDir)..\websiteclientapp\src\lib\api\&quot; /s /i /y" />
+    </Target>
 
 </Project>

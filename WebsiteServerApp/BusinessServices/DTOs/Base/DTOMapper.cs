@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using WebsiteServerApp.DataAccess.Models;
+using YamlDotNet.Core.Tokens;
 
 namespace WebsiteServerApp.BusinessServices.DTOs.Base;
 
@@ -9,9 +10,9 @@ namespace WebsiteServerApp.BusinessServices.DTOs.Base;
 public static class DTOMapper
 {
     #region Property
-    public static PropertyDTO ToDTO(this Property property)
+    public static PropertyDTO ToDTO(this Property property, bool fullConversion = false)
     {
-        return new PropertyDTO()
+        var model = new PropertyDTO()
         {
             Id = property.Id.ToString(),
             Name = property.Name,
@@ -19,12 +20,21 @@ public static class DTOMapper
             Price = property.Price,
             CodeInternal = property.CodeInternal,
             Year = property.Year,
+            PropertyType = property.PropertyType,
             OwnerId = property.OwnerId is not null ? property.OwnerId.ToString() : null,
         };
+
+        if (fullConversion)
+        {
+            model.PropertyImages = property.PropertyImages.Select(image => image.ToDTO()).ToList();
+            model.PropertyTraces = property.PropertyTraces.Select(traces => traces.ToDTO()).ToList();
+        }
+
+        return model;
     }
-    public static Property ToDatabase(this PropertyDTO property)
+    public static Property ToDatabase(this PropertyDTO property, bool fullConversion = false)
     {
-        return new Property()
+        var model = new Property()
         {
             Id = new ObjectId(property.Id.ToString()),
             Name = property.Name,
@@ -32,8 +42,17 @@ public static class DTOMapper
             Price = property.Price,
             CodeInternal = property.CodeInternal,
             Year = property.Year,
+            PropertyType = property.PropertyType,
             OwnerId = property.OwnerId is not null ? new ObjectId(property.OwnerId) : null,
         };
+
+        if (fullConversion)
+        {
+            model.PropertyImages = property.PropertyImages.Select(image => image.ToDatabase()).ToList();
+            model.PropertyTraces = property.PropertyTraces.Select(traces => traces.ToDatabase()).ToList();
+        }
+
+        return model;
     }
 
     public static PropertyImageDTO ToDTO(this PropertyImage property)
@@ -90,6 +109,7 @@ public static class DTOMapper
         {
             Id = owner.Id.ToString(),
             Name = owner.Name,
+            Email = owner.Email,
             Address = owner.Address,
             Birthday = owner.Birthday,
             Photo = owner.Photo
@@ -101,6 +121,7 @@ public static class DTOMapper
         {
             Id = new ObjectId(owner.Id.ToString()),
             Name = owner.Name,
+            Email = owner.Email,
             Address = owner.Address,
             Birthday = owner.Birthday,
             Photo = owner.Photo

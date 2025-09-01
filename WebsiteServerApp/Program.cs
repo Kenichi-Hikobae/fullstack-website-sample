@@ -5,7 +5,6 @@ using WebsiteServerApp.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -16,17 +15,22 @@ builder.Services.AddSingleton<IAppSettings, AppSettings>();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 
+builder.Services.AddTransient<ErrorHandlerMiddleware>();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
         using (var scope = builder.Services.BuildServiceProvider().CreateScope())
         {
-            var appSettings = scope.ServiceProvider.GetRequiredService<AppSettings>();
+            var appSettings = scope.ServiceProvider.GetRequiredService<IAppSettings>();
 
             var webBaseUrl = appSettings.GetSetting(AppSettingType.WebBaseURL);
 
             policy.WithOrigins(webBaseUrl)
+            //policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
         }
@@ -37,6 +41,7 @@ builder.Services.AddCors(options =>
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
+builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
@@ -48,8 +53,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowFrontend");
 app.UseAuthorization();
-app.MapControllers();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.MapControllers();
+
+app.UseOpenApi();
+app.UseSwaggerUI();
 
 app.Run();

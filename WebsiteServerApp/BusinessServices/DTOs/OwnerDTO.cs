@@ -9,6 +9,10 @@ public class OwnerDTO : BaseModelDTO
     /// </summary>
     public string Name { get; set; }
     /// <summary>
+    /// The email of the owner.
+    /// </summary>
+    public string Email { get; set; }
+    /// <summary>
     /// The address of the owner.
     /// </summary>
     public string Address { get; set; }
@@ -24,15 +28,17 @@ public class OwnerDTO : BaseModelDTO
     public OwnerDTO() : base()
     {
         Name = string.Empty;
+        Email = string.Empty;
         Address = string.Empty;
         Photo = string.Empty;
         Birthday = DateTime.MinValue;
     }
 
-    public OwnerDTO(string id, string name, string address, string photo, DateTime birthday)
+    public OwnerDTO(string id, string name, string email, string address, string photo, DateTime birthday)
         : base(id)
     {
         Name = name;
+        Email = email;
         Address = address;
         Photo = photo;
         Birthday = birthday;

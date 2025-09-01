@@ -12,4 +12,7 @@ public static class DBConstantFields
     public const string DatabasePropertyName = "db_properties";
     public const string CollectionPropertyName = "properties";
     public const string CollectionOwnerName = "owners";
+
+    public const string PropertyImageName = "images";
+    public const string PropertyTracesName = "traces";
 }
