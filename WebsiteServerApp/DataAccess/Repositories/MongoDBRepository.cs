@@ -40,11 +40,10 @@ public abstract class MongoDBRepository<T> : IMongoDBRepository<T>
         try
         {
             BsonDocument result = _database.RunCommand<BsonDocument>(new BsonDocument("ping", 1));
-            Console.WriteLine("Pinged your deployment. You successfully connected to MongoDB!");
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            Console.WriteLine("Could not connect to MongoDB, review connection URL in appsetting.json");
         }
     }
 
