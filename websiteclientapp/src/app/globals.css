@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@config "../../tailwind.config.ts";
+
+@layer base {
+  h1 {
+    @apply text-h1; /* uses theme.fontSize.h1 */
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+}
+
+main {
+  min-height: 83vh;
+  padding: 2rem;
+}
