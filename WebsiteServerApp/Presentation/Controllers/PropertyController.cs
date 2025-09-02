@@ -43,14 +43,15 @@ public class PropertyController : Controller
         return await _propertyService.GetTracesByPropertyAsync(propertyId);
     }
 
-
     [HttpPost]
     public async Task<IActionResult> InsertBulkProperties([FromBody] List<PropertyDTO> properties)
     {
-        string file = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/propertiesdto.json");
-        List<PropertyDTO> serializeValues = JsonConvert.DeserializeObject<List<PropertyDTO>>(file);
+        /// Uncomment if you wish to insert the sample data, saved as json in the project.
+        /// You can use the swagger to make the call.
+        //await InsertSampleData();
 
-        await _propertyService.InsertBulkDataAsync(serializeValues);
+        /// Comment the next line if you are inserting the sample data
+        await _propertyService.InsertBulkDataAsync(properties);
 
         return Ok();
     }
@@ -59,5 +60,18 @@ public class PropertyController : Controller
     public async Task<long> GetTotalCount()
     {
         return await _propertyService.GetPropertiesCount();
+    }
+
+    /// <summary>
+    /// Insert the sample data to the database.
+    /// Only use once, next time make sure to clean the collections.
+    /// </summary>
+    /// <returns></returns>
+    private async Task InsertSampleData()
+    {
+        string file = System.IO.File.ReadAllText(Directory.GetCurrentDirectory() + "/DataAccess/Data/propertiesdto.json");
+        List<PropertyDTO> serializeValues = JsonConvert.DeserializeObject<List<PropertyDTO>>(file);
+
+        await _propertyService.InsertBulkDataAsync(serializeValues);
     }
 }

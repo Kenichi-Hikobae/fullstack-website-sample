@@ -25,11 +25,26 @@ public class OwnerController : Controller
     [HttpPost]
     public async Task<IActionResult> InsertBulkOwners([FromBody] List<OwnerDTO> owners)
     {
-        string file = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/ownersdto.json");
+        /// Uncomment if you wish to insert the sample data, saved as json in the project.
+        /// You can use the swagger to make the call.
+        //await InsertSampleData();
+
+        /// Comment the next line if you are inserting the sample data
+        await _ownerService.InsertBulkDataAsync(owners);
+
+        return Ok();
+    }
+
+    /// <summary>
+    /// Insert the sample data to the database.
+    /// Only use once, next time make sure to clean the collections.
+    /// </summary>
+    /// <returns></returns>
+    private async Task InsertSampleData()
+    {
+        string file = System.IO.File.ReadAllText(Directory.GetCurrentDirectory() + "/DataAccess/Data/ownersdto.json");
         List<OwnerDTO> serializeValues = JsonConvert.DeserializeObject<List<OwnerDTO>>(file);
 
         await _ownerService.InsertBulkDataAsync(serializeValues);
-
-        return Ok();
     }
 }
