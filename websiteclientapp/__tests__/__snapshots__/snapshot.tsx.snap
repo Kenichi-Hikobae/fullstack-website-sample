@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div>
+    <h1
+      class="text-center"
+    >
+      Properties and Owners
+    </h1>
+    <hr
+      class="shrink-0 bg-divider border-none w-full h-divider"
+      role="separator"
+    />
+    <div
+      class="p-5"
+    >
+      <h2>
+        Welcome to PROP-TY.
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus gravida quis blandit turpis. Augue neque gravida in fermentum et sollicitudin ac orci. Et sollicitudin ac orci phasellus egestas. Elementum tempus egestas sed sed risus pretium quam vulputate. Interdum velit euismod in pellentesque massa placerat duis ultricies. Rhoncus mattis rhoncus urna neque viverra justo nec ultrices dui. Praesent semper feugiat nibh sed pulvinar. Ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Malesuada proin libero nunc consequat interdum varius sit amet. Lectus quam id leo in vitae. Sed viverra tellus in hac habitasse platea dictumst. Vivamus at augue eget arcu. Augue mauris augue neque gravida in.
+      </p>
+    </div>
+    <div
+      class="grid xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-4 place-items-center"
+    >
+      <div
+        class="flex flex-col relative overflow-hidden h-auto text-foreground box-border bg-content1 outline-solid outline-transparent data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 shadow-medium rounded-large transition-transform-background motion-reduce:transition-none my-4 p-2 w-xs"
+        tabindex="-1"
+      >
+        <div
+          class="flex p-3 z-10 w-full justify-start shrink-0 overflow-inherit color-inherit subpixel-antialiased rounded-t-large pb-0 pt-2 px-4 flex-col items-start"
+        >
+          <h2
+            class="font-bold"
+          >
+            Properties
+          </h2>
+          <small
+            class="text-default-500"
+          >
+            Description
+          </small>
+        </div>
+        <div
+          class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
+        >
+          <div
+            class="shadow-black/5 shadow-none group relative overflow-hidden bg-content3 dark:bg-content2 before:opacity-100 before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:border-t before:border-content4/30 before:bg-gradient-to-r before:from-transparent before:via-content4 dark:before:via-default-700/10 before:to-transparent after:opacity-100 after:absolute after:inset-0 after:-z-10 after:bg-content3 dark:after:bg-content2 rounded-large"
+            style="max-width: 270px;"
+          >
+             
+            <img
+              alt="Card background"
+              class="relative z-10 shadow-black/5 data-[loaded=true]:opacity-100 shadow-none opacity-0 transition-transform-opacity motion-reduce:transition-none !duration-300 object-cover rounded-xl"
+              src="https://picsum.photos/id/178/300/"
+              width="270"
+            />
+          </div>
+        </div>
+        <div
+          class="p-3 h-auto flex w-full items-center overflow-hidden color-inherit subpixel-antialiased rounded-b-large text-small justify-between"
+        >
+          <a
+            class="tap-highlight-transparent no-underline hover:opacity-hover active:opacity-disabled z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent transform-gpu data-[pressed=true]:scale-[0.97] cursor-pointer outline-solid outline-transparent data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-4 min-w-20 h-10 text-small gap-2 rounded-medium [&>svg]:max-w-[theme(spacing.8)] transition-transform-colors-opacity motion-reduce:transition-none bg-primary text-primary-foreground data-[hover=true]:opacity-hover w-full"
+            data-react-aria-pressable="true"
+            href="/properties"
+            role="button"
+            tabindex="0"
+          >
+            View All
+          </a>
+        </div>
+      </div>
+      <div
+        class="flex flex-col relative overflow-hidden h-auto text-foreground box-border bg-content1 outline-solid outline-transparent data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 shadow-medium rounded-large transition-transform-background motion-reduce:transition-none my-4 p-2 w-xs"
+        tabindex="-1"
+      >
+        <div
+          class="flex p-3 z-10 w-full justify-start shrink-0 overflow-inherit color-inherit subpixel-antialiased rounded-t-large pb-0 pt-2 px-4 flex-col items-start"
+        >
+          <h2
+            class="font-bold"
+          >
+            Owners
+          </h2>
+          <small
+            class="text-default-500"
+          >
+            Description
+          </small>
+        </div>
+        <div
+          class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
+        >
+          <div
+            class="shadow-black/5 shadow-none group relative overflow-hidden bg-content3 dark:bg-content2 before:opacity-100 before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:border-t before:border-content4/30 before:bg-gradient-to-r before:from-transparent before:via-content4 dark:before:via-default-700/10 before:to-transparent after:opacity-100 after:absolute after:inset-0 after:-z-10 after:bg-content3 dark:after:bg-content2 rounded-large"
+            style="max-width: 270px;"
+          >
+             
+            <img
+              alt="Card background"
+              class="relative z-10 shadow-black/5 data-[loaded=true]:opacity-100 shadow-none opacity-0 transition-transform-opacity motion-reduce:transition-none !duration-300 object-cover rounded-xl"
+              src="https://picsum.photos/id/9/300/"
+              width="270"
+            />
+          </div>
+        </div>
+        <div
+          class="p-3 h-auto flex w-full items-center overflow-hidden color-inherit subpixel-antialiased rounded-b-large text-small justify-between"
+        >
+          <a
+            class="tap-highlight-transparent no-underline hover:opacity-hover active:opacity-disabled z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent transform-gpu data-[pressed=true]:scale-[0.97] cursor-pointer outline-solid outline-transparent data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-4 min-w-20 h-10 text-small gap-2 rounded-medium [&>svg]:max-w-[theme(spacing.8)] transition-transform-colors-opacity motion-reduce:transition-none bg-primary text-primary-foreground data-[hover=true]:opacity-hover w-full"
+            data-react-aria-pressable="true"
+            href="/owners"
+            role="button"
+            tabindex="0"
+          >
+            View All
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

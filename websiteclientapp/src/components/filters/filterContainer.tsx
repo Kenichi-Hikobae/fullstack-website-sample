@@ -27,7 +27,7 @@ import React from "react";
 import type {Selection, SelectedItems, SharedSelection} from "@heroui/react";
 import { SearchIcon } from "@/components/icons";
 import { PropertyFiltersDTO, PropertyType } from "@/lib/api/apiClient";
-import { useDebounce } from "@uidotdev/usehooks";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export type TypeObject = {
   name: string;
@@ -97,11 +97,11 @@ export default function FilterContainer({ onFilterChange }: FilterContainerProps
   /**The search filter for the name value. */
   const [nameFilterValue, setNameFilterValue] = React.useState("");
   /**The search filter for the name value as a debounce. */
-  const [nameDebounce] = useDebounce(nameFilterValue, 500)
+  const [nameDebounce] = useDebounce(nameFilterValue, 300)
   /**The search filter for the address value. */
   const [addressFilterValue, setAddressFilterValue] = React.useState("");
   /**The search filter for the address valueas a debounce. */
-  const [addressDebounce] = useDebounce(addressFilterValue, 500)
+  const [addressDebounce] = useDebounce(addressFilterValue, 300)
   /**The price range filter for the property. */
   const [priceRange, setPriceRange] = React.useState<[number, number]>([MIN_PRICERANGE, MAX_PRICERANGE]);
   /**The property types selected to be filtered. */

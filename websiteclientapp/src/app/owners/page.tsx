@@ -18,7 +18,7 @@ import { api } from "@/lib/client";
 import { OwnerDTO } from "@/lib/api/apiClient";
 
 /**The columns t obe displayed in the table.*/
-export const columns = [
+export const ownerColumnsTable = [
   {name: "ID", uid: "id", sortable: true},
   {name: "NAME", uid: "name", sortable: true},
   {name: "EMAIL", uid: "email", sortable: true},
@@ -77,7 +77,7 @@ export default function OwnersPage () {
             </div>
           }
         >
-        <TableHeader columns={columns}>
+        <TableHeader columns={ownerColumnsTable}>
           {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
         </TableHeader>
         <TableBody items={items}>
