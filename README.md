@@ -96,4 +96,18 @@ It is best for small sample data.
 - [MongoDB Database Tools](https://www.mongodb.com/try/download/database-tools) (for `mongodump`, `mongorestore`, `mongoimport`, `mongoexport`)  
 - Alternatively, you can use [MongoDB Compass](https://www.mongodb.com/products/compass) (GUI) to manually import/export JSON files.  
 
+---
+# Run application
+
+To be able to run the application you ahve to follow the next steps:
+
+- Setup your mongo Db connection after the databse has been created, in the following path: `\WebsiteServerApp\appsetting.json`
+- Run the file `RunAPP.bat` located at the root of the repository.
+- Wait until it finishes and you will noticed that the browser will open the application with the correct urls and ports.
+
+You can of course open the correct files to run the application manually.
+- API - by running the solution `WebsiteServerApp\WebsiteServerApp.sln` and running it.
+- Frontend - Accessing the folder `websiteclientapp` and running the command `npm build` and then `npm startapp` or `npm start`
+  
+> If something happend during this process, do not hesitate to contact me through email.
 
