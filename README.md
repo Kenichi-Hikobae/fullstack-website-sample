@@ -55,7 +55,7 @@ It is best if you want the database **exactly as it was exported**.
     ├── owners.bson
     ...
    ```
-> You can also find the backup in the path 'MongoDB Backup\dump'
+
 2. Restore into MongoDB:
    ```bash
    mongorestore --db db_properties ./db_properties
