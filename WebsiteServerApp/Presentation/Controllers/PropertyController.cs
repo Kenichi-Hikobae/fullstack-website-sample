@@ -47,7 +47,7 @@ public class PropertyController : Controller
     [HttpPost]
     public async Task<IActionResult> InsertBulkProperties([FromBody] List<PropertyDTO> properties)
     {
-        var file = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/propertiesdto.json");
+        string file = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/propertiesdto.json");
         List<PropertyDTO> serializeValues = JsonConvert.DeserializeObject<List<PropertyDTO>>(file);
 
         await _propertyService.InsertBulkDataAsync(serializeValues);

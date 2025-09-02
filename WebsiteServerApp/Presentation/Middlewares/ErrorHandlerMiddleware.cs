@@ -29,7 +29,9 @@ public class ErrorHandlerMiddleware : IMiddleware
             {
                 status = 500,
                 title = "An unexpected error occurred",
+#if DEBUG
                 detail = ex.Message
+#endif
             });
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebsiteServerApp.BusinessServices.DTOs;
-using WebsiteServerApp.BusinessServices.DTOs.Base;
 using WebsiteServerApp.BusinessServices.Interfaces;
 
 namespace WebsiteServerApp.Presentation.Controllers;
@@ -26,7 +25,7 @@ public class OwnerController : Controller
     [HttpPost]
     public async Task<IActionResult> InsertBulkOwners([FromBody] List<OwnerDTO> owners)
     {
-        var file = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/ownersdto.json");
+        string file = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/ownersdto.json");
         List<OwnerDTO> serializeValues = JsonConvert.DeserializeObject<List<OwnerDTO>>(file);
 
         await _ownerService.InsertBulkDataAsync(serializeValues);
