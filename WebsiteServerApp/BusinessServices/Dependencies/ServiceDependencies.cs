@@ -1,9 +1,9 @@
 ﻿using WebsiteServerApp.BusinessServices.Interfaces;
 using WebsiteServerApp.BusinessServices.Services;
 
-namespace WebsiteServerApp.BusinessServices;
+namespace WebsiteServerApp.BusinessServices.Dependencies;
 
-public static class ServiceExtensions
+public static class ServiceDependencies
 {
     /// <summary>
     /// Add the services used in the API client.

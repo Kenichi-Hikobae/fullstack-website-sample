@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AutoMapper;
 using WebsiteServerApp.BusinessServices.DTOs;
-using WebsiteServerApp.BusinessServices.DTOs.Base;
 using WebsiteServerApp.BusinessServices.Interfaces;
 using WebsiteServerApp.DataAccess.Interfaces;
 using WebsiteServerApp.DataAccess.Models;
@@ -13,11 +12,13 @@ namespace WebsiteServerApp.BusinessServices.Services;
 /// </summary>
 public class OwnerService : IOwnerService
 {
+    private readonly IMapper _mapper;
     private readonly IOwnerRepository _ownerRepository;
     private OwnerRepository _repository => _ownerRepository as OwnerRepository;
 
-    public OwnerService(IOwnerRepository ownerRepository)
+    public OwnerService(IMapper mapper, IOwnerRepository ownerRepository)
     {
+        _mapper = mapper;
         _ownerRepository = ownerRepository;
     }
 
@@ -26,19 +27,12 @@ public class OwnerService : IOwnerService
     {
         List<Owner> owners = await _ownerRepository.GetAllOwnersAsync();
 
-        List<OwnerDTO> result = owners.Select(owner => owner.ToDTO()).ToList();
-
-        return result;
+        return _mapper.Map<List<OwnerDTO>>(owners);
     }
 
     /// <inheritdoc/>
     public async Task InsertBulkDataAsync(List<OwnerDTO> owners)
     {
-        List<Owner> ownersModels = owners.Select(owner => owner.ToDatabase()).ToList();
-
-        var serialize = JsonConvert.SerializeObject(ownersModels);
-        File.WriteAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/owners.json", serialize);
-
-        await _repository.InsertBulkAsync(ownersModels);
+        await _repository.InsertBulkAsync(_mapper.Map<List<Owner>>(owners));
     }
 }

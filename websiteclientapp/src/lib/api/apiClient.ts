@@ -362,8 +362,8 @@ export interface OwnerDTO extends BaseModelDTO {
     name: string;
     email: string;
     address: string;
-    photo: string;
-    birthday: Date;
+    photo: string | undefined;
+    birthday: Date | undefined;
 }
 
 export interface PropertiesLoadedCountDTO {
@@ -379,8 +379,8 @@ export interface PropertyDTO extends BaseModelDTO {
     year: number;
     propertyType: PropertyType;
     ownerId: string | undefined;
-    propertyImages: PropertyImageDTO[];
-    propertyTraces: PropertyTraceDTO[];
+    propertyImages: PropertyImageDTO[] | undefined;
+    propertyTraces: PropertyTraceDTO[] | undefined;
 }
 
 export enum PropertyType {

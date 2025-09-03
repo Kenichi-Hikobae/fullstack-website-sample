@@ -1,10 +1,9 @@
-﻿using MongoDB.Bson;
+﻿using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using Newtonsoft.Json;
-using System;
 using WebsiteServerApp.BusinessServices.DTOs;
-using WebsiteServerApp.BusinessServices.DTOs.Base;
 using WebsiteServerApp.BusinessServices.Interfaces;
+using WebsiteServerApp.BusinessServices.MapperProfiles;
 using WebsiteServerApp.DataAccess.Interfaces;
 using WebsiteServerApp.DataAccess.Models;
 using WebsiteServerApp.DataAccess.Repositories;
@@ -16,11 +15,13 @@ namespace WebsiteServerApp.BusinessServices.Services;
 /// </summary>
 public class PropertyService : IPropertyService
 {
+    private readonly IMapper _mapper;
     private readonly IPropertyRepository _propertyRepository;
     private PropertyRepository _repository => _propertyRepository as PropertyRepository;
 
-    public PropertyService(IPropertyRepository propertyRepository)
+    public PropertyService(IMapper mapper, IPropertyRepository propertyRepository)
     {
+        _mapper = mapper;
         _propertyRepository = propertyRepository;
     }
 
@@ -33,7 +34,7 @@ public class PropertyService : IPropertyService
             Builders<Property>.Filter.Gte(property => property.Price, filters.MinPrice),
             Builders<Property>.Filter.Lte(property => property.Price, filters.MaxPrice),
             GenerateYearFilter(filters.YearFilterType),
-            filters.Types?.Count <= 0 ? 
+            filters.Types?.Count <= 0 ?
                 FilterDefinition<Property>.Empty :
                 Builders<Property>.Filter.In(property => property.PropertyType, filters.Types)
         );
@@ -43,9 +44,14 @@ public class PropertyService : IPropertyService
 
         long filterCount = await _propertyRepository.GetCountByFiltersAsync(filter);
 
-        List<PropertyDTO> result = properties.Select(property => property.ToDTO(true)).ToList();
-
-        return new PropertiesLoadedCountDTO(result, filterCount);
+        /// Used the parameter FullConversion to execute a custom mapping in some properties.
+        return new PropertiesLoadedCountDTO(
+            _mapper.Map<List<PropertyDTO>>(
+                properties,
+                opts => opts.Items[ProfileConstants.FullConversionOptName] = true
+            ),
+            filterCount
+        );
     }
 
     private FilterDefinition<Property> GenerateYearFilter(PropertyYearFilterType? yearFilterType)
@@ -58,12 +64,12 @@ public class PropertyService : IPropertyService
             case PropertyYearFilterType.MoreThan20:
                 return Builders<Property>.Filter.Lt(property => property.Year, DateTime.Now.Year - 20);
             case PropertyYearFilterType.LessThan5:
-                return Builders<Property>.Filter.Gte(property => property.Year,DateTime.Now.Year - 5);
+                return Builders<Property>.Filter.Gte(property => property.Year, DateTime.Now.Year - 5);
             case PropertyYearFilterType.LessThan10:
                 return Builders<Property>.Filter.Gte(property => property.Year, DateTime.Now.Year - 10);
             case PropertyYearFilterType.LessThan20:
                 return Builders<Property>.Filter.Gte(property => property.Year, DateTime.Now.Year - 20);
-            default: 
+            default:
                 return FilterDefinition<Property>.Empty;
         }
     }
@@ -73,9 +79,10 @@ public class PropertyService : IPropertyService
     {
         List<Property> properties = await _propertyRepository.GetPropertiesByOwnerIdAsync(new ObjectId(ownerId));
 
-        List<PropertyDTO> result = properties.Select(property => property.ToDTO(true)).ToList();
-
-        return result;
+        return _mapper.Map<List<PropertyDTO>>(
+            properties,
+            opts => opts.Items[ProfileConstants.FullConversionOptName] = true
+        );
     }
 
     /// <inheritdoc/>
@@ -83,20 +90,16 @@ public class PropertyService : IPropertyService
     {
         List<PropertyTrace> traces = await _propertyRepository.GetTracesByPropertyIdAsync(new ObjectId(propertyId));
 
-        List<PropertyTraceDTO> result = traces.Select(trace => trace.ToDTO()).ToList();
-
-        return result;
+        return _mapper.Map<List<PropertyTraceDTO>>(traces);
     }
 
     /// <inheritdoc/>
     public async Task InsertBulkDataAsync(List<PropertyDTO> properties)
     {
-        List<Property> propertyModels = properties.Select(property => property.ToDatabase(true)).ToList();
-
-        var serialize = JsonConvert.SerializeObject(propertyModels);
-        File.WriteAllText(System.IO.Directory.GetCurrentDirectory() + "/DataAccess/Data/properties.json", serialize);
-
-        await _repository.InsertBulkAsync(propertyModels);
+        await _repository.InsertBulkAsync(_mapper.Map<List<Property>>(
+            properties,
+            opts => opts.Items[ProfileConstants.FullConversionOptName] = true
+        ));
     }
 
     /// <inheritdoc/>
@@ -108,8 +111,8 @@ public class PropertyService : IPropertyService
     /// <inheritdoc/>
     public async Task<PropertyDTO> GetPropertyByIdAsync(string id)
     {
-        var result = await _repository.GetAsync(new ObjectId(id));
+        Property result = await _repository.GetAsync(new ObjectId(id));
 
-        return result.ToDTO(true);
+        return _mapper.Map<PropertyDTO>(result, opts => opts.Items[ProfileConstants.FullConversionOptName] = true);
     }
 }

@@ -7,8 +7,8 @@ import { Roboto } from 'next/font/google'
 import "./globals.css";
 
 import { Providers } from './providers';
-import Header from "@/layouts/header";
-import Footer from "@/layouts/footer";
+import Header from "@/components/layouts/header";
+import Footer from "@/components/layouts/footer";
 
 /**
  * The roboto font comming from google and NextJs source

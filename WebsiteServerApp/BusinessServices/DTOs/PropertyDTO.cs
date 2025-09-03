@@ -36,11 +36,11 @@ public class PropertyDTO : BaseModelDTO
     /// <summary>
     /// The property images for this property.
     /// </summary>
-    public List<PropertyImageDTO> PropertyImages { get; set; }
+    public List<PropertyImageDTO>? PropertyImages { get; set; }
     /// <summary>
     /// The property traces for this property.
     /// </summary>
-    public List<PropertyTraceDTO> PropertyTraces { get; set; }
+    public List<PropertyTraceDTO>? PropertyTraces { get; set; }
 
     public PropertyDTO() : base()
     {
