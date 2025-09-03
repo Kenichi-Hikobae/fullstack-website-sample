@@ -1,5 +1,7 @@
+using FluentValidation;
 using WebsiteServerApp;
-using WebsiteServerApp.BusinessServices;
+using WebsiteServerApp.BusinessServices.Dependencies;
+using WebsiteServerApp.BusinessServices.Validators;
 using WebsiteServerApp.DataAccess;
 using WebsiteServerApp.Presentation.Middlewares;
 
@@ -9,6 +11,11 @@ builder.WebHost.ConfigureKestrel((context, options) =>
 {
     options.Configure(context.Configuration.GetSection("Kestrel"));
 });
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<PropertyDTOValidator>();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -22,8 +29,6 @@ builder.Services.AddServices();
 
 builder.Services.AddTransient<ErrorHandlerMiddleware>();
 
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -35,7 +40,6 @@ builder.Services.AddCors(options =>
             var webBaseUrl = appSettings.GetSetting(AppSettingType.WebBaseURL);
 
             policy.WithOrigins(webBaseUrl)
-            //policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
         }

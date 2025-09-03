@@ -72,7 +72,7 @@ export default function OwnersPage () {
                 color="primary"
                 page={page}
                 total={totalPages}
-                onChange={(page) => setPage(page)}
+                onChange={setPage}
               />
             </div>
           }

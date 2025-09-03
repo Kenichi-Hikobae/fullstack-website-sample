@@ -64,9 +64,9 @@ export default function Header() {
         
         <NavbarMenu>
           {headerItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenuItem key={`${item}-${index}`} className="m-2">
               <Link
-                className="w-full"
+                className="flex justify-self-end"
                 color={
                   index === 2 ? "primary" : index === headerItems.length - 1 ? "danger" : "foreground"
                 }

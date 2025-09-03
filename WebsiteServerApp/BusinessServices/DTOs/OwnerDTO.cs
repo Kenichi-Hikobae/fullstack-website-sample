@@ -19,11 +19,11 @@ public class OwnerDTO : BaseModelDTO
     /// <summary>
     /// The photo value of the owner.
     /// </summary>
-    public string Photo { get; set; }
+    public string? Photo { get; set; }
     /// <summary>
     /// The birthday of the owner.
     /// </summary>
-    public DateTime Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     public OwnerDTO() : base()
     {
