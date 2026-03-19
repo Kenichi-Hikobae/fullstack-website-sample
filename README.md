@@ -111,3 +111,38 @@ You can of course open the correct files to run the application manually.
   
 > If something happend during this process, do not hesitate to contact me through email.
 
+# Application Architecture
+
+The application follows a layered architecture designed to promote separation of concerns, scalability, and maintainability:
+
+## Business Layer
+This layer encapsulates the core application logic. It contains service classes responsible for implementing business rules, orchestrating workflows, and coordinating interactions between components. It may also include abstractions over database operations to ensure the domain logic remains decoupled from infrastructure concerns.
+
+## Data Access Layer (DAL)
+The Data Access Layer manages all interactions with the persistence mechanism. It includes entity models and repository implementations responsible for querying, retrieving, and persisting data. This layer abstracts the underlying database technology, providing a consistent interface to the Business Layer.
+
+## Presentation Layer
+This layer exposes the application to external clients. It consists of API controllers that handle HTTP requests and responses, as well as middleware components responsible for cross-cutting concerns such as authentication, authorization, and request validation. It acts as the entry point into the system.
+
+<img width="328" height="824" alt="ArquitectureLayers" src="https://github.com/user-attachments/assets/336aaca3-8b94-48f9-8d12-dd6cdf2a34c8" />
+
+# Website Images
+
+<img width="1898" height="1071" alt="Sample_1" src="https://github.com/user-attachments/assets/a0084c9b-9e15-48a5-967e-7b9e2cbaa028" />
+
+---
+
+<img width="1919" height="1079" alt="Sample_2" src="https://github.com/user-attachments/assets/84c8c433-c864-47fd-ac83-3bb94e0b2cf4" />
+
+---
+
+<img width="1919" height="1079" alt="Sample_3" src="https://github.com/user-attachments/assets/254c3006-f023-4d0e-8fc2-9393e78eef12" />
+
+---
+
+<img width="1919" height="1079" alt="Sample_4" src="https://github.com/user-attachments/assets/ebb5d84f-8d96-4041-9d77-4a117c1500d0" />
+
+---
+
+<img width="1919" height="1079" alt="Sample_5" src="https://github.com/user-attachments/assets/15b003ec-9dbe-47ba-9075-457dba0f151f" />
+

@@ -64,14 +64,14 @@ export default function PropertyPage() {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    if (property === undefined) return [];
+    if (property === undefined || !property.propertyTraces) return [];
 
     return property.propertyTraces.slice(start, end);
   }, [page, property]);
   
   /**The total pages for all the current model. */
   const totalPages = React.useMemo(() => {
-    const value = property ? property.propertyTraces.length : 1;
+    const value = property && property.propertyTraces ? property.propertyTraces.length : 1;
     return Math.ceil(value/10);
   }, [property]);
 
